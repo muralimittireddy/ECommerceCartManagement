@@ -30,12 +30,12 @@ public class ProductService {
         product.setProductName(productDTO.getProductName());
         product.setPrice(productDTO.getPrice());
 
-        User seller = userRepository.findByUsername(productDTO.getSellerName())
-                .orElseThrow(() -> new EntityNotFoundException("Seller not found with username " + productDTO.getSellerName()));
+        User seller = userRepository.findById(productDTO.getSellerId())
+                .orElseThrow(() -> new EntityNotFoundException("Seller not found with username " + productDTO.getSellerId()));
         product.setSeller(seller);
 
-        Category category = categoryRepository.findByCategoryName(productDTO.getCategoryName())
-                .orElseThrow(() -> new EntityNotFoundException("Category not found with name " + productDTO.getCategoryName()));
+        Category category = categoryRepository.findByCategoryId(productDTO.getCategoryId())
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with name " + productDTO.getCategoryId()));
         product.setCategory(category);
 
         Product savedProduct = productRepository.save(product);
@@ -60,8 +60,8 @@ public class ProductService {
         productDTO.setProductId(product.getProductId());
         productDTO.setProductName(product.getProductName());
         productDTO.setPrice(product.getPrice());
-        productDTO.setSellerName(product.getSeller().getUsername());
-        productDTO.setCategoryName(product.getCategory().getCategoryName());
+        productDTO.setSellerId(product.getSeller().getId());
+        productDTO.setCategoryId(product.getCategory().getCategoryId());
         return productDTO;
     }
 }

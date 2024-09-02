@@ -30,12 +30,12 @@ public class CartProductService {
         cartProduct.setQuantity(cartProductDTO.getQuantity());
 
         // Fetch the Cart entity
-        Cart cart = cartRepository.findById(cartProductDTO.getCart().getCartId())
-                .orElseThrow(() -> new EntityNotFoundException("Cart not found with id " + cartProductDTO.getCart().getCartId()));
+        Cart cart = cartRepository.findById(cartProductDTO.getCartId())
+                .orElseThrow(() -> new EntityNotFoundException("Cart not found with id " + cartProductDTO.getCartId()));
 
         // Fetch the Product entity
-        Product product = productRepository.findById(cartProductDTO.getProduct().getProductId())
-                .orElseThrow(() -> new EntityNotFoundException("Product not found with id " + cartProductDTO.getProduct().getProductId()));
+        Product product = productRepository.findById(cartProductDTO.getProductId())
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id " + cartProductDTO.getProductId()));
 
         cartProduct.setCart(cart);
         cartProduct.setProduct(product);
@@ -57,14 +57,14 @@ public class CartProductService {
 
         CartDTO cartDTO = new CartDTO();
         cartDTO.setCartId(cartProduct.getCart().getCartId());
-        cartProductDTO.setCart(cartDTO);
+        cartProductDTO.setCartId(cartDTO.getCartId());
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(cartProduct.getProduct().getProductId());
         productDTO.setProductName(cartProduct.getProduct().getProductName());
         productDTO.setPrice(cartProduct.getProduct().getPrice());
 
-        cartProductDTO.setProduct(productDTO);
+        cartProductDTO.setProductId(productDTO.getProductId());
 
         return cartProductDTO;
     }

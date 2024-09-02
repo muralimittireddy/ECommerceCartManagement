@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartProductDTO {
     private Long cpid;
-    private CartDTO cart;
-    private ProductDTO product;
+    private Long cartId;
+    private Long productId;
     private Integer quantity;
 
     // Getters and Setters

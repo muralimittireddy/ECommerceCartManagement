@@ -2,8 +2,10 @@ package com.ECommerceManagement.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -23,8 +25,14 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private Cart cart;
 
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Use only the unique identifier
+    }
+
 }

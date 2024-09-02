@@ -11,8 +11,8 @@ public class ProductDTO {
     private Long productId;
     private String productName;
     private Double price;
-    private String sellerName;
-    private String categoryName;
+    private Long sellerId;
+    private Long categoryId;
 
     // Getters and Setters
 }
